@@ -7,7 +7,7 @@ import {
 	Setting,
 	TextComponent,
 } from "obsidian";
-import { EditorState, Transaction } from "@codemirror/state";
+import { EditorState } from "@codemirror/state";
 import OpenAIHandler from "OpenAIHandler";
 import TextStreamHandler from "TextStreamHandler";
 

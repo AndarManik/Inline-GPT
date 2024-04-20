@@ -4,8 +4,8 @@
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
 	"description": "Inline text completion using ChatGPT",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"author": "Andar Manik",
+	"authorUrl": "https://andarmanik.github.io/PersonalWebsite/",
+	"fundingUrl": "",
 	"isDesktopOnly": false
 }
