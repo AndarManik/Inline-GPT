@@ -20,7 +20,10 @@ export default class OpenAIHandler {
 			this.gpt4Available = models.data.some(
 				(model) => model.id == "gpt-4-turbo"
 			);
-		} catch {}
+			return true;
+		} catch {
+			return false;
+		}
 	}
 
 	setModel(model: string) {

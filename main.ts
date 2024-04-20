@@ -5,6 +5,7 @@ import {
 	Plugin,
 	PluginSettingTab,
 	Setting,
+	TextComponent,
 } from "obsidian";
 import { EditorState, Transaction } from "@codemirror/state";
 import OpenAIHandler from "OpenAIHandler";
@@ -28,8 +29,9 @@ export default class InlineGPT extends Plugin {
 	async onload() {
 		await this.loadSettings();
 		this.openAIHandler = new OpenAIHandler();
+		let isValid = false;
 		if (this.settings.chatGPTKey) {
-			await this.openAIHandler.setAPIKey(this.settings.chatGPTKey);
+			isValid = await this.openAIHandler.setAPIKey(this.settings.chatGPTKey);
 			this.openAIHandler.setModel(this.settings.model);
 		}
 
@@ -77,7 +79,7 @@ export default class InlineGPT extends Plugin {
 			},
 		});
 
-		this.addSettingTab(new InlineGPTSettingTab(this.app, this));
+		this.addSettingTab(new InlineGPTSettingTab(this.app, this, isValid));
 	}
 
 	onunload() {}
@@ -97,34 +99,45 @@ export default class InlineGPT extends Plugin {
 
 class InlineGPTSettingTab extends PluginSettingTab {
 	plugin: InlineGPT;
+	isValid: boolean;
 
-	constructor(app: App, plugin: InlineGPT) {
+	constructor(app: App, plugin: InlineGPT, isValid: boolean) {
 		super(app, plugin);
 		this.plugin = plugin;
+		this.isValid = isValid;
 	}
 
 	display(): void {
 		const { containerEl } = this;
 
 		containerEl.empty();
+		var apiKeyText: TextComponent;
 
 		new Setting(containerEl)
 			.setName("OpenAI API Key")
-			.setDesc("Enter your OpenAI API Key here.")
+			.setDesc("Enter your OpenAI API Key.")
 			.addText((text) =>
-				text
+				apiKeyText = text
 					.setPlaceholder("Enter API Key")
-					.setValue(this.plugin.settings.chatGPTKey)
+					.setValue((this.plugin.settings.chatGPTKey) ? ((this.isValid) ? "Your API key is active" : "Error or invalid try again") : "")
 					.onChange(async (value) => {
 						this.plugin.settings.chatGPTKey = value;
 						await this.plugin.saveSettings();
 					})
 			)
 			.addButton((btn) => {
-				btn.setButtonText("Save API Key").onClick(async () => {
-					await this.plugin.openAIHandler.setAPIKey(
+				btn.setButtonText("Set API Key").onClick(async () => {
+					this.isValid = await this.plugin.openAIHandler.setAPIKey(
 						this.plugin.settings.chatGPTKey
 					);
+					if(this.isValid) {
+						apiKeyText.setValue("Your API key is active");
+
+					}
+					else {
+						apiKeyText.setValue("Error or invalid try again");
+					}
+
 				});
 			});
 
