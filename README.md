@@ -25,7 +25,7 @@ You will need Node.js to install this
 3. Inside .obsidian create a folder named plugins if you don't already have one.
 4. Enter plugins and in your terminal run the following commands into your terminal
 ```shell
-git clone [Paste the url from the green code button]
+git clone https://github.com/AndarManik/Inline-GPT.git
 cd Inline-GPT
 npm i
 npm run dev
