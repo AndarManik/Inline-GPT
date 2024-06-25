@@ -20,8 +20,8 @@ You can use it just like ChatGPT while also always having a note on the conversa
 ## How to install?
 You will need Node.js to install this
 
-1. Locate you vault in your terminal or in vscode.
-2. Enter into the vault and enter into the folder named .obsidian.
+1. Locate your vault by running **Open another vault** in the command pallet and cd into it in command prompt
+2. cd into the vault and into the folder named .obsidian.
 3. Inside .obsidian create a folder named plugins if you don't already have one.
 4. Enter plugins and in your terminal run the following commands into your terminal
 ```shell
