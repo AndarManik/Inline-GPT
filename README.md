@@ -12,7 +12,7 @@ The plugin requires an OpenAI API key
 
 ## What can it do?
 
-It can generate text, edit text, but most importantly format text. ChatGPT can quickly generate any type of advanced markdown syntax making it useful for: tables, graphs, and diagrams.
+It can generate text, edit text, but most importantly format text. ChatGPT can quickly generate any type of advanced markdown syntax making it useful for: tables, graphs, and diagrams. Default hotkey is Shift-Enter
 
 or 
 
